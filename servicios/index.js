@@ -14,12 +14,12 @@ function createToken(user){
 }
 
 function decodeToken(token){
-  const decode = new Promise((resolve, reject) =>{
+  const decoded = new Promise((resolve, reject) =>{
     try{
       const paylod = jwt.decode(token, config.SECRET_TOKEN)
 
       if (paylod.exp <= moment().unix()) {
-        resolve({
+        reject({
           status: 401,
           message: 'El token ha expirado'
         })
